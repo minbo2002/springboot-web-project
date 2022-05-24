@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface MemoRepository extends JpaRepository<Memo, Long> {
 
-    List<Memo> findByMnoBetweenOrderByMnoDesc(Long from, Long to);  // 쿼리메서드
+    List<Memo> findByMnoBetweenOrderByMnoDesc(Long from, Long to);  // 쿼리메서드 (특정범위 정렬)
 
     Page<Memo> findByMnoBetween(Long from, Long to, Pageable pageable);  // Pageable 인터페이스 결합
+
+    void deleteMemoByMnoLessThan(Long num);  // 쿼리메서드 (특정범위 삭제)
 }

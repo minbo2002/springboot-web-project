@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.Memo;
 
@@ -61,10 +62,12 @@ class MemoRepositoryTest {
         System.out.println(memo);
     }
 
+    @Transactional
+    @Commit
     @Test  // 수정 테스트
     public void testUpdate() {
         Memo memo = Memo.builder()
-                .mno(398L)
+                .mno(396L)
                 .memoText("Update Text")
                 .build();
 
@@ -132,5 +135,13 @@ class MemoRepositoryTest {
         Page<Memo> result = memoRepository.findByMnoBetween(300L, 310L, pageable);
 
         result.get().forEach(memo -> System.out.println(memo));
+    }
+
+    @Transactional
+    @Commit
+    @Test
+    public void testQueryMethodDelete() {
+
+        memoRepository.deleteMemoByMnoLessThan(398L);
     }
 }
