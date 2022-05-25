@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ex2</title>
 </head>
 <body>
 
@@ -24,6 +24,19 @@
 
         </li>
     </ul>
+
+    <ul>
+        <th:block th:each="dto: ${list}">
+            <li th:text="${dto.sno % 5 == 0} ? ${dto.sno}:${dto.first}"></li>
+        </th:block>
+    </ul>
+
+    <ul>
+        <li th:each="dto : ${list}">
+            [[ ${#numbers.formatInteger(dto.sno, 5)} ]]
+        </li>
+    </ul>
+
 
 </body>
 </html>
