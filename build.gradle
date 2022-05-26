@@ -1,15 +1,28 @@
 import static java.util.regex.Pattern.compile
 
+// querydsl 추가
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+
 plugins {
     id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'war'
+
+    // querydsl 추가
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
+
 
 group = 'org.zerock'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
 
 configurations {
     compileOnly {
@@ -17,16 +30,20 @@ configurations {
     }
 }
 
+
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+
     // 타임리프
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -36,11 +53,40 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+
     // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.0'
 
+    // querydsl 추가
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 }
+
 
 test {
     useJUnitPlatform()
 }
+
+// querydsl 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    complieOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+// querydsl 끝
