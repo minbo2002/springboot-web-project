@@ -1,9 +1,9 @@
-package org.zerock.ex2.repository;
+package org.zerock.ex2.sample.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.zerock.ex2.entity.Memo;
+import org.zerock.ex2.sample.entity.Memo;
 
 import java.util.List;
 

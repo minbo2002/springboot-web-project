@@ -1,4 +1,4 @@
-package org.zerock.ex2.entity;
+package org.zerock.ex2.sample.entity;
 
 import lombok.*;
 
