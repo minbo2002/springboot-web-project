@@ -2,7 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="setContent(content)">
+
     <head>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+                integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
+                crossorigin="anonymous"></script>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,10 +17,14 @@
         <title>Simple Sidebar - Start Bootstrap Template</title>
 
         <!-- Bootstrap core CSS -->
-        <link th:href="@{/vender/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link th:href="@{/css/simple-sidebar.css}" rel="stylesheet">
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
     </head>
 
@@ -71,17 +80,16 @@
             </nav>
 
             <div class="container-fluid">
-                <th:block th:replace="${content}"></th:block>
+
+                <th:block th:replace = "${content}"></th:block>
+
             </div>
+
         </div>
         <!-- /#page-content-wrapper -->
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- Bootstrap core JavaScript -->
-    <script th:src="@{/vender/jquery/jquery.min.js}"></script>
-    <script th:src="@{/vender/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -92,6 +100,8 @@
     </script>
 
     </body>
+
 </th:block>
 
 </html>
+
