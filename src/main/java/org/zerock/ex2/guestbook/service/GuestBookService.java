@@ -11,10 +11,9 @@ public interface GuestBookService {
 
     PageResultDTO<GuestBookDTO, GuestBook> getList(PageRequestDTO pageRequestDTO);
 
-
+    GuestBookDTO read(Long gno);
 
     //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
-
 
 
     default GuestBook dtoToEntity(GuestBookDTO dto) {

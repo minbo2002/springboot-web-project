@@ -12,6 +12,7 @@ import org.zerock.ex2.guestbook.dto.PageResultDTO;
 import org.zerock.ex2.guestbook.entity.GuestBook;
 import org.zerock.ex2.guestbook.repository.GuestbookRepository;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -21,6 +22,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 
     private final GuestbookRepository guestbookRepository;
 
+    // 등록
     @Override
     public Long register(GuestBookDTO guestBookDTO) {
 
@@ -36,6 +38,7 @@ public class GuestBookServiceImpl implements GuestBookService {
         return result.getGno();
     }
 
+    // 목록
     @Override
     public PageResultDTO<GuestBookDTO, GuestBook> getList(PageRequestDTO pageRequestDTO) {
 
@@ -45,10 +48,18 @@ public class GuestBookServiceImpl implements GuestBookService {
 
         Function<GuestBook, GuestBookDTO> fn = (entity -> entityToDto(entity));
 
-//        PageResultDTO<GuestBookDTO, GuestBook> pageResultDTO = new PageResultDTO<>(result, fn);
-     // PageResultDTO에 JPA의 처리결과인 Page<Entity>와 Function을 전달해서  entity객체를 -> DTO의 list로 변환
-
-//        return pageResultDTO;
+//      PageResultDTO<GuestBookDTO, GuestBook> pageResultDTO = new PageResultDTO<>(result, fn);
+//      return pageResultDTO;
         return new PageResultDTO<>(result, fn);
+//      PageResultDTO에 JPA의 처리결과인 Page<Entity>와 Function을 전달해서  entity객체를 -> DTO의 list로 변환
+    }
+
+    // 글조회
+    @Override
+    public GuestBookDTO read(Long gno) {
+
+        Optional<GuestBook> result = guestbookRepository.findById(gno);
+
+        return result.isPresent() ? entityToDto(result.get()) : null;
     }
 }

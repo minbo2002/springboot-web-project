@@ -31,9 +31,6 @@ public class PageResultDTO<DTO, EN> {
         // EN : Entity를 의미
         dtoList = result.stream().map(fn).collect(Collectors.toList());
 
-        // List<DTO> dtoList = result.stream().map(fn).collect(Collectors.toList())
-        // 위에처럼하면 왜 public void testList() 목록 테스트에서 오류가 날까?
-
         totalPage = result.getTotalPages();
 
         makePageList(result.getPageable());
