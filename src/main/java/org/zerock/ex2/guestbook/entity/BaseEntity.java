@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(value = {AuditingEntityListener.class})
 @Getter
-public class BaseEntity {
+abstract class BaseEntity {
 
     @CreatedDate  // entity가 생성되어 저장될때 시간이 자동으로 저장
     @Column(name = "regdate", updatable = false)  // DB에 반영될때 regdate컬럼은 변경되지 않는다는 의미

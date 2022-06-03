@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.ex2.guestbook.dto.GuestBookDTO;
 import org.zerock.ex2.guestbook.dto.PageRequestDTO;
-import org.zerock.ex2.guestbook.dto.PageResultDTO;
 import org.zerock.ex2.guestbook.service.GuestBookService;
 
 @Controller
@@ -54,12 +53,41 @@ public class GuestBookController {
         return "redirect:/guestbook/list";
     }
 
-    @GetMapping("/read")
+    @GetMapping({"/read", "/modify"})
     public void read(long gno, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Model model) {
         log.info("gno : " + gno);
 
         GuestBookDTO dto = guestBookService.read(gno);
 
         model.addAttribute("dto", dto);
+    }
+
+    @PostMapping("/modify")
+    public String modify(GuestBookDTO guestBookDTO,
+                         @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+                         RedirectAttributes redirectAttributes) {
+
+        log.info("post modify........................");
+        log.info("guestBookDTO : " + guestBookDTO);
+
+        guestBookService.modify(guestBookDTO);
+
+        redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("type", pageRequestDTO.getType());
+        redirectAttributes.addAttribute("keyword", pageRequestDTO.getKeyword());
+        redirectAttributes.addAttribute("gno", guestBookDTO.getGno());
+
+        return "redirect:/guestbook/read";
+    }
+
+    @PostMapping("/remove")
+    public String remove(long gno, RedirectAttributes redirectAttributes) {
+        log.info("gno : " + gno);
+
+        guestBookService.remove(gno);
+
+        redirectAttributes.addFlashAttribute("msg", gno);
+
+        return "redirect:/guestbook/list";
     }
 }

@@ -48,7 +48,7 @@ public class PageResultDTO<DTO, EN> {
 
         end = totalPage > tempEnd ? tempEnd : totalPage;
 
-        next = totalPage > tempEnd;
+        next = totalPage > end;
 
         pageList = IntStream.rangeClosed(start, end)
                 .boxed()

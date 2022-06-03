@@ -56,7 +56,7 @@ class MemoRepositoryTest {
     public void testSelectOne() {
         Long mno = 100L;  // DB에 존재하는 PK mno
 
-        Memo memo = memoRepository.getReferenceById(mno);
+        Memo memo = memoRepository.getOne(mno);
         System.out.println("=======================================");
 
         System.out.println(memo);
@@ -132,7 +132,7 @@ class MemoRepositoryTest {
     public void testQueryMethodWithPageable() {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
-        Page<Memo> result = memoRepository.findByMnoBetween(300L, 310L, pageable);
+        Page<Memo> result = memoRepository.findByMnoBetween(301L, 310L, pageable);
 
         result.get().forEach(memo -> System.out.println(memo));
     }
