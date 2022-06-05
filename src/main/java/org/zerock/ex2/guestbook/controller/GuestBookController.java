@@ -28,7 +28,6 @@ public class GuestBookController {
     }
     */
 
-
     @GetMapping("/")
     public String index() {
 
