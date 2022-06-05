@@ -52,6 +52,15 @@ public class GuestBookServiceImpl implements GuestBookService {
 
         Page<GuestBook> result = guestbookRepository.findAll(booleanBuilder, pageable);
 
+        /* 리팩토링
+        public Page<GuestBookDTO> getList(PageRequestDTO pageRequestDTO) {
+
+        Page<GuestBookDTO> map = guestbookRepository.findAll(booleanBuilder, pageable).map(this::entityToDto);
+
+        return map;
+        }
+         */
+
         Function<GuestBook, GuestBookDTO> fn = (entity -> entityToDto(entity));
 
 //      PageResultDTO<GuestBookDTO, GuestBook> pageResultDTO = new PageResultDTO<>(result, fn);
@@ -113,7 +122,7 @@ public class GuestBookServiceImpl implements GuestBookService {
             return booleanBuilder;
         }
 
-        // 검색조건
+        // 검색조건 추가
         BooleanBuilder conditionBuilder = new BooleanBuilder();
 
         if(type.contains("t")) {

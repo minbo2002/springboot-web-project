@@ -21,6 +21,14 @@ public class GuestBookController {
 
     private final GuestBookService guestBookService;
 
+    /* 생성자 주입방식
+    @Autowired
+    public GuestBookController(GuestBookService guestBookService) {
+        this.guestBookService = guestBookService;
+    }
+    */
+
+
     @GetMapping("/")
     public String index() {
 
