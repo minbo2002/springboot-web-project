@@ -41,13 +41,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    // MariaDB JDBC, Thmeleaf 시간처리 관련 라이브러리
+//    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
+//    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
+
 
     // 타임리프
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 
-    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation ('org.springframework.boot:spring-boot-starter-test') {

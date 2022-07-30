@@ -60,6 +60,7 @@ public class GuestBookController {
         return "redirect:/guestbook/list";
     }
 
+    // 읽기, 수정
     @GetMapping({"/read", "/modify"})
     public void read(long gno, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Model model) {
         log.info("gno : " + gno);
@@ -69,6 +70,7 @@ public class GuestBookController {
         model.addAttribute("dto", dto);
     }
 
+    // 수정
     @PostMapping("/modify")
     public String modify(GuestBookDTO guestBookDTO,
                          @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
@@ -87,6 +89,7 @@ public class GuestBookController {
         return "redirect:/guestbook/read";
     }
 
+    // 삭제
     @PostMapping("/remove")
     public String remove(long gno, RedirectAttributes redirectAttributes) {
         log.info("gno : " + gno);
